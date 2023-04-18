@@ -1,0 +1,241 @@
+####################################################################################################################################################################
+# Chapter 2: Variables, expressions, and statements
+####################################################################################################################################################################
+# 2.1: Values and types
+
+# Values are basic things a program works with such as a letter or number
+# 1,2, and "Marsey" are all values
+# There are two types of values, 2 is an integer while "Marsey" is a string
+# Strings are enclosed in quotation marks
+
+# The print statement can print strings or integers
+
+print(4)
+print("Marsey the cat")
+
+# The type() function can be used determine the type of value
+
+type(1)  # <class 'int'>
+type("Cat")  # <class 'str'>
+
+# Numbers with a decimal point belong to a type called float due to these numbers being represented in a format called floating point
+
+type(3.2)  # <class 'float'>
+
+# Numbers with or without decimals that are wrapped in quotation marks are recognized as strings
+
+type("17")  # <class 'str'>
+type("3.2")  # <class 'str'>
+
+# Numbers with commas between them are not legal integers in python
+
+print(1, 000, 000)  # 1 0 0
+
+# This is a semantic error: Code that runs without producing an error message but "misinterprets" the meaning
+
+####################################################################################################################################################################
+# 2.2: Variables
+
+# A variable is a name that refers to a value
+# An assignment statement creates new variables and gives them values
+
+message = "I have a cute cat named Marsey"
+n = 17
+pi = 3.14159
+
+# To display the value of a variable, the print statement can be used
+
+print(pi)
+
+# Using the type statement on a variable returns the type of value that variable refers to
+
+type(message) # <class 'str'>
+type(n) # <class 'int'>
+type(pi) # <class 'float'>
+
+####################################################################################################################################################################
+# 2.3: Variable names and keywords
+
+# Variable names can be long and can contain numbers and letters. However, they cannot start with a number
+# Underscores (_) can appear in names
+# Giving a variable an illegal name gives a syntax error
+
+# 76variable = "Cat" # SyntaxError: invalid decimal literal
+
+
+# Variables cannot use keywords as variable names such as "class" and "True"
+
+####################################################################################################################################################################
+# 2.4: Statements
+
+# A statement is a unit of code that the python interpreter can execute. A script usually contains a sequence of statements
+
+print(1)
+x = 2
+print(x)
+
+# The script above produces the following output:
+# 1
+# 2
+# The assignment statement produces no output
+
+####################################################################################################################################################################
+# 2.5:  Operators and operands
+
+# OOperators are special symbols that represent computations like addition and multiplication. The values the operators are applied to are called operands
+# The operators +, -, *, /, and ** perform addition, subtraction, multiplication, division, and exponentiation, as in the following examples:
+
+20 + 14 # 34
+hour = 4
+hour - 1 # 3
+hour * 60 + 3 # 243
+5 * 2 # 10
+5 ** 2 # 25
+(5 + 9) * (15 - 7) # 112
+
+# In python 3.x the result of division is a floating point result:
+
+minute = 59
+minute / 60 # 0.9833333333333333
+
+# To obtain the floored division answer use the floored (// integer) division
+
+minute = 59
+minute // 60 # 0
+
+####################################################################################################################################################################
+# 2.6:  Expressions
+
+# An expression is a combination of values, variables, and operators. A value all by itself is considered an expression, and so is a variable
+
+x = 4
+17
+x
+x + 17 # 21
+
+# Typing an expression in interactive mode, the interpreter evaluates it and displays the result
+
+####################################################################################################################################################################
+# 2.7:  Order of operations
+
+# When more than one operator appears in an expression, the order of evaluation depends on the rules of precedence
+# The order of precedence is parentheses, exponentiation, multiplication and division (left to right), addition and subtraction (left to right)
+# Operators with the same precedence are evaluated from left to right
+
+(1+1)**(5-2) # 8
+
+####################################################################################################################################################################
+# 2.8:  Modulus operator
+
+# The modulus operator works on integers and yields the remainder when the first operand is dvidied by the second
+# The modulus operator is a percent sign (%) in python
+
+7 // 3 # 2
+7 % 3  # 1
+
+# The modulus operator can check whether one number is divisible by another:
+# if x % y is zero, then x is divisible by y
+
+# The right-most digits or digits from a number can be extracted using the modulus operator
+# x % 10 yields the right-most digit of x (in base 10)
+# x % 100 yields the last two digits
+
+####################################################################################################################################################################
+# 2.9:  String Operations
+
+# The + operator works with strings, but instead of performing addition it performs concatenation, which means joining the strings by linking them end to end
+
+first = "100"
+second = "150"
+print(first + second) # 100150
+
+# The * operator also works with strings by multiplying the content of a string by an integer:
+
+first = "Cat "
+seconds = 4
+print(first * seconds) # Cat Cat Cat Cat
+
+####################################################################################################################################################################
+# 2.10:  Asking for user input
+
+# Python has a built-in function called input that gets input from the keyboard
+
+inp = input()
+print(inp)
+
+# It is good practice to print a prompt telling the user what to input. A string can be passed to input to be displayed to the user before pausing for input
+name = input("What is your name?\n")
+print(name)
+
+# The sequence \n at the end of the prompt represents a newline, which is a special character that causes a line break
+
+# If the user is expected to type an integer, convert the trun value to int using the int() function:
+
+prompt = 'What...is the airspeed velocity of an unladen swallow?\n'
+speed = input(prompt)
+int(speed)
+
+####################################################################################################################################################################
+# 2.11:  Comments
+
+# As programs get larger and more complicated they become more difficult to look at. Notes can be added called comments and start with the # symbol
+# Everything from the # to the end of the line is ignored and has no effect on the program
+
+####################################################################################################################################################################
+# 2.15:  Exercises
+
+# Exercise 2: Write a program that uses input to prompt a user for their name and then welcomes them.
+
+prompt3 = input("Enter your name: ")
+print("Hello " + prompt3)
+
+# Exercise 3: Write a program to prompt the user for hours and rate per hour to compute gross pay.
+
+prom_hours = input("Enter hours worked: \n")
+prom_rate = input("Enter Rate: \n")
+pay = float(prom_hours) * float(prom_rate)
+pay = str(pay)
+print("Pay: " + pay)
+
+# Exercise 4: Assume the following expressions are executed:
+
+width = 17
+height = 12.0
+
+# For each of the following expressions, write the value of the expression and the type (of the value of the expression).
+
+# a. width//2
+
+width//2 # Value is 8. Type is int
+type(width//2)
+
+# b. width/2.0
+
+width/2.0 # Value is 8.5
+type(width/2.0) # Type is float
+
+# c. height/3
+
+height/3 # Value is 4.0
+type(height/3) # Type is float
+
+# d. 1 + 2 * 5
+
+1 + 2 * 5 # Value is 11
+type(1 + 2 * 5) # Type is int
+
+# 5. Write a program which prompts the user for a Celsius temperature, convert the temperature to Fahrenheit, and print out the converted temperature.
+
+cel = input("Enter the celsius temperature to convert to fahrenheit: \n")
+cel = float(cel)
+farn = (cel * 9/5) + 32
+farn = str(farn)
+print(farn + " degrees fahrenheit")
+
+###################################################################################################################################################################
+# End of Chapter 2
+###################################################################################################################################################################
+
+
+
+
