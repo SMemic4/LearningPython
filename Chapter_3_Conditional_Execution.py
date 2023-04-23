@@ -62,12 +62,28 @@ not (x > y)
 
 x = 10
 if (x > 0): 
-  print("x is positive")
+     print("x is positive")
 
 # The boolean expression after the if statement is called the condition. The if statement ends with a colon character (:) and the lines after the if statement are indented
 # If the logical condition is true, then the indented statement gets executed. If the logical condition is fals ethe indented statement is skipped
 
 # if statements have the same structure as funtion definitions or for loops
 # Statements like this are called compound statements because they strech across more than one line
+# THere is no limit on the number of statements that can appear in the body, but there must be at least one
+# To write an if statement with no statements or a place holder, a pass statement can be put into the loop
+
+if (x > 0):
+   pass
+
+if (x > 10):
+    print("Small")
+  
+
+
+# When entering an if statement, the prompt will change from three > to three dots to indicate the code is in the middle of a block of statements
+
+####################################################################################################################################################################
+# 3.4 Alternative execution
+
 
 
