@@ -156,6 +156,33 @@ def repeat_lyrics():
 ####################################################################################################################################################################
 # 4.9 Parameters and Arguments
 ####################################################################################################################################################################
+# Some functions require arguments. For example, when calling math.sin() a number must be passed as an argument. Some arguments take more than one. Math.pow() takes two, the base and the exponent
+# Inside functions, arguments are assigned to variables called parameters. An example:
+
+def print_twice(name):
+  print(name)
+  print(name)
+  
+
+print_twice("Marsey")
+
+# The function assigns the argument to a parameter named "name", When the function is called it prints the value of the parameter twice. The function works with any value that can be printed
+# The same rules of composition that apply to built-in functions also apply to user-defined functions
+
+print_twice("Marsey "*6)
+
+# The argument is evaulated before the function
+# Variables can also be used as an argument
+
+marsey = "Marsey the cat"
+print_twice(marsey)
+
+####################################################################################################################################################################
+# 4.10 Fruitful functions and void functions
+####################################################################################################################################################################
+# Some functions such as math functions yield results, these are termed fruitful functions
+# Other functions like print_twice() perform an action but don't return a value. These are called void functions
+# 
 
 
 
