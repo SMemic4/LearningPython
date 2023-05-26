@@ -182,7 +182,114 @@ print_twice(marsey)
 ####################################################################################################################################################################
 # Some functions such as math functions yield results, these are termed fruitful functions
 # Other functions like print_twice() perform an action but don't return a value. These are called void functions
-# 
+# When caling a fruitful function, ut's important to do something with the result such as assining it to a variable or using it as part of an expression
+
+x = math.cos(radians)
+golden = (math.sqrt(5) + 1) / 2
+
+# Whencalling a fruitful function and the result is not stored in a variable the return value disappears
+
+math.sqrt(5) # This script computes the square root of 5, but due to it not storing the result in a variable or displaying the result it is not useful
+
+# Void function might display something on the screen or have some other effect but they don't have a return value. Trying to assign the result to a variable produces a special value called None
+
+result = print_twice("Marsey")
+print(result)
+
+# The value None is not the same as the string "None". It is a special value that has its own type
+
+print(type(None)) # <class 'NoneType'>
+
+# To return a result from a function, use a return statement in the function
+
+
+def addtwo(a, b):
+    added = a + b
+    return added
+
+x = addtwo(3, 5)
+print(x)
+
+# When this script executes, the print statement will print ou "8" because the addtwo function was called with 3 and 5 as arguments.
+# Within the function, the parameters a and b were 3 and 5 respectively. The function computed the sum of the two numbres and placed it in the local function variable named added
+# THen it used the return statement to send the computed value back to the calling code as the function result, which was assigned to the varaible x and printed out
+
+####################################################################################################################################################################
+# 4.11 Why functions?
+####################################################################################################################################################################
+# THere are several reasons to divide a program as a function:
+# Creating a new function provides an opportunity to name a group of statements, which makes the program easier to read, understand, and debug
+# Functions can make a program smaller by eliminating repetitive code, and changes only need to be made in one place
+# Dividing a long program into function all for the code to be debugged at one part at a time
+# Well-designed functions are often useful for many programs
+
+
+####################################################################################################################################################################
+# 4.14 Exercises
+####################################################################################################################################################################
+# 1. What is the purpose of the "def" keyword in python?
+
+# It indicates that the following indented section of code is to be stored for later and that the indented section of code is to be stored for later
+
+# 2. What will the following Python program print out?
+
+def carp():
+  print("Zap")
+def capy():
+  print("ABC"
+
+capy()
+carp()
+capy()
+
+# It will print out ABC Zap ABC
+
+# 3. Rewrite your pay computation with time-and-a-half for over-time and create a function called computepay which takes two parameters (hours and rate).
+
+def computepay(hours, rate):
+    if hours > 40:
+        x = 40 * rate + ((hours - 40) * (rate * 1.5))
+        return x
+    else:
+        x = hours * rate
+        return x
+
+
+x = computepay(45,10)
+print(x)
+
+# 4. Rewrite the grade program from the previous chapter using a function called computegrade that takes a score as its parameter and returns a grade as a string.
+
+def computegrade():
+    x = input("Enter score: ")
+    x = int(x)
+    try:
+        if x >= 90:
+            score = "A"
+            return score
+        elif x >= 80:
+            score = "B"
+        elif x >= 70:
+            score = "C"
+        elif x >= 60:
+            score = "D"
+        else:
+            score = "F"
+
+        return score
+    except:
+        score = "Bad score"
+        return score
+
+
+x = computegrade()
+print(x)
+
+
+
+
+
+ 
 
 
 
