@@ -88,7 +88,54 @@ fruit[:]
 ####################################################################################################################################################################
 # 6.5 Strings are immutable
 ####################################################################################################################################################################
+# It is tempting to use the operator on the left side of an assignment with the intention of changing a character in a string
 
+greeting = "Hello world"
+greeting[0] = "J" # TypeError: 'str' object does not support item assignment
+
+# The object in this case is the string and the item is a character is being assigned
+# An object is the same thing as a value. An item is one of the value in a sequence
+
+# The reason for the error is that strings are immutable, meaning that an existing string can't be changed. The best thing to be done is to create a new string that is a variation of the original
+
+greeting = "Hello world"
+new_greeting = "JJJ" + greeting[1:]
+print(new_greeting) # JJJello, world
+
+# This example concatenates a new firt letter onto a slice of greetin, It has no effect on the original string
+
+####################################################################################################################################################################
+# 6.6 Looping and counting
+####################################################################################################################################################################
+# The following program counts the number of times the letter "a" appears in a string:
+
+word = "banana"
+count = 0
+for letter in word:
+    if letter == "a":
+        count = count + 1
+print(count) # 3
+
+# Exercise 3: Encapsulate this code in a function named count, and generalize it so that it accepts the string and the letter as arguments.
+
+def count(word, char):
+    num = 0
+    for letter in word:
+        if letter == char:
+            num = num + 1
+    print(num)
+    
+####################################################################################################################################################################
+# 6.7 The in operator
+####################################################################################################################################################################
+# The word in is a boolean operator that takes two string and returns True if the first appears as a substring in the second
+
+print("a" in "cat") # True
+print("b" in "cat") # False
+
+####################################################################################################################################################################
+# 6.8 String Comparison
+####################################################################################################################################################################
 
 
 
