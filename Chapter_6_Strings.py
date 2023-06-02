@@ -136,6 +136,92 @@ print("b" in "cat") # False
 ####################################################################################################################################################################
 # 6.8 String Comparison
 ####################################################################################################################################################################
+# The comparison operators work on strings
+word = "banana"
+if word == "banana":
+    print("It's the same word")
+
+# Other comparison operations are useful for putting words in alphabetical order:
+
+if word < "banana":
+    print("Your word," + word + " comes before banana")
+elif word > "banana":
+    print("Your word," + word + " comes after banana")
+else: 
+    print("It's bananas")
+
+# Python does not handle uppercase and lowercase letters the same way that most do. Al the uppercase letters come before the lowercase letters
+
+word = "Pineapple"
+if word < "banana":
+    print("Your word," + word + " comes before banana")
+elif word > "banana":
+    print("Your word, " + word + " comes after banana")
+else: 
+    print("It's bananas") # Your word,Pineapple comes before banana
+
+# A common way to address this problem is to convert strings to a standard format such as all lowercase, before performing the comparison
+
+####################################################################################################################################################################
+# 6.9 String Methods
+####################################################################################################################################################################
+# Strings are an example of python objects. An object contains both data and methods, which are functions that are built into the object and are available to any instance of the object
+# Pyhtong has a function called dir which lists the methods available for an object
+# The type function shows the type of function, while dir function shows the available methods
+
+obj = "Kiki the cat"
+type(obj) # <class 'str'>
+dir(obj) # A list of functions
+help(str.capitalize) # help() takes a function as an argument and returns a description of what the function does
+
+# Calling a method is similar to calling a function (it takes arguments and returns a value), however the syntax is different.
+# A method is called by appending the method name to the variable name using the period as a delimiter
+# For example, the method upper takes a string and returns a new string with all uppercase letters
+# Instead of the function syntax upper(word), it uses the method syntax word.upper()
+
+word = "banana"
+new_word = word.upper()
+print(new_word) # BANANA
+
+# The form dot notation specifies the name of the method, upper, and the name of the string to apply the method to, word/ The empty parenthese indicate that this method takes no argument
+# A method call is called an invocation; in this case, upper is being invoked on the word
+# For example, there is a string method named find that searches for the position of one string within another
+
+word = "banana"
+index = word.find("a")
+print(index) # 1
+
+# The find method can find substrings as well as characters
+
+word.find("na") # 2
+
+# It cn take a second argument of where the index should start:
+ 
+word.find("na", 3) # 4
+
+# One common task is to remove white space (spaces, tabs, or newlines) from the beginning and end of a string using the strip method
+
+line = " That cat is oranage "
+line.strip() # 'That cat is oranage'
+
+# Some methods such as startswith returns boolean values
+
+line = "Marsey the cat"
+line.startswith("Marsey") # True
+line.startswith("m") # False
+
+# startswith requires case to math, so sometimes it is valuable to take the line and map it all to lowercase before doing any checking using the lower method
+
+line = "Marsey the cat"
+line.startswith("m") # False
+line.lower().startswith("m") # True
+
+# In the example above, the method lower is called and then startswith is used to see if the resulting lowercase string starts with the letter "m"
+
+####################################################################################################################################################################
+# 6.10 Parsing Strings
+####################################################################################################################################################################
+
 
 
 
