@@ -221,6 +221,158 @@ line.lower().startswith("m") # True
 ####################################################################################################################################################################
 # 6.10 Parsing Strings
 ####################################################################################################################################################################
+# Often times it will be neccesarry to look into a string and find a substring.
+# For example if presented a series of lines formatted as follows:
+
+data = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
+
+# And one wanted to pill out only the second half of the address, this can be done using find and string slicing
+# First, the position of the at-sign will be found in the string, and then the position of the first space after the at-sign. Then string slcing will be used to extract the portion of the string
+
+atpos = data.find("@")
+print(atpos) # 21
+sppos = data.find(" ", atpos)
+print(sppos) # 31
+host = data[atpos+1:sppos]
+print(host) # uct.ac.za
+
+# A version of the find method allows for a specific position to be specified where the string will begin to looking.
+
+####################################################################################################################################################################
+# 6.11 Format Operator
+####################################################################################################################################################################
+# The format operator (%) allows for the construction of strings, replacing parts of the strings with the data stored in variables
+# When applied to integers % is the modulus operator, But when the first operand is a string % is the format operator
+# For example, the format sequence %d means that the sewcond operand should be formatted as an integer ("d" stands for decimal)
+
+camels = 42
+print("%d" % camels) # 42
+
+# The result is the string "42" which should not be confused with the integer value 42
+# A format sequence can appear anywhere in the string, so a value can be embed in a sentence
+
+print("I have spotted %d camels" % camels) # I have spotted 42 camels
+
+# If there is more than one format equence in the string, the second argument has to be a tuple. Each format sequence is matched with an element of the tuple, in order.
+# The following example uses %d to format an integer, %g to format a floating-point number, and %s to format a string 
+
+print("In %d years I have spotted %g %s" % (3, 0.2, "camels")) # In 3 years I have spotted 0.2 camels
+
+# The number of elements in the tuple must match the number of format sequences in the string. The types of the elements also must match the format
+
+print("%d %d %d " % (1,2)) # TypeError: not enough arguments for format string
+print("%d %d %d " % (1,2, 3)) # 1 2 3
+
+# In the first example, there aren't enough elements; in the second, the element is the wrong type
+# The format operator is powerful, but it can be difficult to use
+
+# A tuple is a sequence of comma-separated values inside a pair of parenthesis
+
+####################################################################################################################################################################
+# 6.14 Exercises
+####################################################################################################################################################################
+# 1. Take the following python code that stores a string. Use find and string slicing to extract the portion of the string after the colo character and then use the float function to convert the extracted string into a floating point number
+
+str = 'X-DSPAM-Confidence:0.8475'
+
+beg = str.find(":")
+sil = str[beg+1:]
+sil = float(sil)
+print(sil)
+
+# 2. Read the documentation for string methods and experiment with them
+# str.capitalize() returns a copy of a string with its first character capitalized and the rest lowercased 
+
+word = "mArsey"
+print(word.capitalize()) # Marsey
+
+# str.casefold() returns a casefolded copy of the string
+
+word = "MArsey"
+print(word.casefold()) "marsey"
+
+# str.count(sub, [,start[,end]]) return the number of non-verlapping occurences of a substring sub in the range [start,end]. Optional arguments start and end are intepred as in slice notation
+
+word = "Marsey the cat is a cute cat and is an orange cat"
+word.count("cat") # 3
+
+# str.endwith(suffix{, start[, end]]) returns true if the string ends with the specified suffix otherwise returns false. suffix can also be a tuple of suffixes to look for
+
+word = "That kitten is a cutie"
+word.endswith("ie") # True
+word.endswith("cuty") # False
+
+# str.find(sub[, start[, end]]) returns the lowest index in the string where the substring sub is found with the slice. Returns -1 if sub is not found
+
+word = "Kiki is a cute white cat"
+word.find("white") # 15
+word.find("ke") # -1
+
+# str.index(sub[, start[, end]]) like find() but raises ValueError when the substring is not found
+
+word = "Kiki is a cute white cat"
+word.index("white") # 15
+word.index("ke") # ValueError: substring not found
+
+# str.isalnum() Returns True if all character in the string are alphanumeric and there is at least one character
+
+word = "abcdefgh"
+word.isalnum() # True
+
+# str.islower() returns True if all cased characters in the string are lowercase and there is at least one cased character
+
+word = "Marsey"
+word2 = "marsey"
+word.islower() # False
+word2.islower() # True
+
+# str.isnumeric() returns True if all characters in the string are numeric character and there is at least one character
+
+word = "12345"
+word2 = "1234aaaa"
+word.isnumeric() # True
+word2.isnumeric() #False
+
+# str.isalnum returns TRUE if all characters in the string are alphanumeric (letters and numbers) and there is at least one character
+
+word = "abcdef"
+word2 = "asd12!3"
+word.isalnum() # True
+word2.isalnum() # False
+
+# str.isatitle() returns True if the string is a titlecased string and there is at least one character, Uppercase character may only follow uncased characters and lowercase characters only cased ones
+
+# str.isupper() returns True if all cased cahracter in the string are uppercase and there is at least one cased character
+
+word = "MARSEY"
+word2 = "kik"
+word.isupper() # True
+word2.isupper() # False
+
+# str.lower() returns a copy of the string with all the cased characters converted to lowercase
+
+word = "KIKI"
+word.lower() # 'kiki"
+
+# str.partiion(sep) splits the string at the first occurrrence of spe, and returns a 3-tuple containing the part beofre the separator and the separator itself
+
+word = "Marsey the cat"
+word.partition("the")
+
+# str.removeprefix() if the string starts with the prefix string, reutnrs string{len(prefix)}, otherwise return a copy of the string
+
+word = "Marsey the cat"
+word.removeprefix("Marsey") # " the cat"
+
+# str.removesuffix() if the string ends with the suffix string, returns string{len(prefix)}, otherwise return a copy of the string
+
+# str.replace(old, new[, count]) returns a copy of the string with all occurrences of substring old replaced by new. 
+
+# str.split(sep=None, maxsplit=- 1) returns a list of words in the string, using sep as the delimiter string. 
+
+####################################################################################################################################################################
+# End of Chapter 6
+####################################################################################################################################################################
 
 
 
