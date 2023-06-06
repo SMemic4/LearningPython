@@ -100,6 +100,165 @@ print(len(fhand.read())) # 0
 ####################################################################################################################################################################
 # 7.5 Searching through a file
 ####################################################################################################################################################################
+# When searching through data in a file, it is a very common pattern to read through a file, ignoring most of the lines and only processsing lines which meet a particular condition
+# A combination of the pattern for reading a file with string methods allow for the creation of simple search mechnanisms
+# For example, if one wanted to read a file and only print out lines which started with the prefix "From:" the string method startswith could be used to select those desired lines
+
+fhand = open('mbox-short.txt')
+
+for line in fhand:
+    if line.startswith("From:"):
+        print(line)
+        
+# The output does what it's supposed to but there are extra blank lines that appear in the prompt. This is due to the invisible newline character
+# Each line ends with a newline, so the print statementthe string in the variable line, which includes a newline and then print adds another newline resulting in the double spacing effect
+# Line slicing could be used to print all but the last character, but a simpler approach would be striping the whitespaces from the from the rightside of the string
+
+fhand = open("mbox-short.txt")
+
+for lines in fhand:
+    if lines.startswith("From:"):
+        print(lines.strip())
+        
+# When the program runs the output is the same but without the extra blank lines
+# As file processing programs become more complicated, structure the search loops using continue. 
+# This will tell the program to look for interesting programs and to skip uninteresting lines
+
+fhand = open("mbox-short.txt")
+
+for lines in fhand:
+    if not lines.startswith("From:"):
+        continue
+    print(lines.strip())
+    
+# The output of the program is the same, but processing only occurs for lines where the line fulfills the condition
+
+# The find string method can be used to simulate a text editor that finds lines where the search string occurs anywhere in the line
+# Since find looks for an occurrence of a string within another string and either returns the position of the string or -1 if the string was found, the following loop works to find specific emails
+
+fhand = open("mbox-short.txt")
+
+for lines in fhand:
+    if lines.find("@uct.ac.za") == -1:
+        continue
+    print(lines.strip())
+    
+# Here the contracted form of the if statement is used where a continue is on the same line as the if
+# The contracted form of the if functions the same as if the continue were on the next line indented
+
+####################################################################################################################################################################
+# 7.6 Letting the user choose the file name
+####################################################################################################################################################################
+# It is not feasible to edit the python code every time it needs to process a different file
+# It would be more usable to ask a user to enter the file name string each time the program runs si they can use the program on different files without changing the python code
+
+fname = input("Enter file name: ")
+fhand = open(fname)
+count = 0
+for line in fhand:
+    if line.startswith("Subject:"):
+        count = count + 1
+print("There were", count, "subject lines in", fname)
+
+# However this code lacks the ability to handle if the user enters the name of a file that does not exist
+
+####################################################################################################################################################################
+# 7.7 Using try, except, and open
+####################################################################################################################################################################
+# The above code will fail to run if the user enters in a nonexistent file name. This can be circumvented using try except and open
+
+fname = input("Enter the file name: ")
+try:
+    fhand = open(fname)
+except:
+    print("File cannot be opened:", fname)
+    exit()
+count = 0
+for line in fhand:
+    if line.startswith("Subject:"):
+        count = count + 1
+print("There were", count, "subject lines in", fname)
+
+# The exit function terminates the program. It is a function that is called that never returns 
+
+# Protecting the open call is a good example of the proper use of try and except in a python program
+
+####################################################################################################################################################################
+# 7.8 Writing Files
+####################################################################################################################################################################
+# To write a file, it must be opened with mode "w" as a second parameter
+
+fout = open("output.txt", "w")
+print(fout)
+
+# If the file already exists, opening it in write mode clears out the old data and starts fresh, so proceed with caution. If the file doesn't exist, a new one is created
+# The write method of the file handle object puts data into the file returning the number of characters written. The default write mode is text for writing (and reading) strings
+
+line1 = "THis here's the first line of this text \n"
+fout.write(line1)
+
+# Again. the file object keeps track of where it so, so calling write again will add new data to the end
+# The end of the line must be managed by explicity inserting the newline character when ending a line
+# The print statement automatically appends a newline, but the write method does not add the new line automatically
+
+line2 = 'the emblem of our land.\n'
+fout.write(line2)
+
+# When one is done with writing the file, the file must be closed so the last bit of data is physically written to the disk so it will not be lost if the power goes off
+
+fout.close()
+
+# Pythong automatically closes the files when the program closes, but when writing files it is important to explicitly close the files so as to leave nothing to chance
+
+####################################################################################################################################################################
+# 7.11 Exercises
+####################################################################################################################################################################
+# 1. Write a program to read through a file and print the contents of the file (line by line) all in upper case. 
+
+fname = input("Enter the name of the file: ")
+try:
+    fhand = open(fname)
+except:
+    print("Not a legit file")
+for lines in fhand:
+    print(lines.upper())
+    
+# 2, Write a program to prompt for a file name and then reads for lines that start with "X-DSPAM-Confidence: 0.8475", extract the floating-point number count the lines and compute the average spam confidence
+
+fname = input("Enter the file name: ")
+
+try:
+    fhand = open(fname)
+except:
+    print("File not found")
+    quit()
+
+count = 0
+total = 0
+
+for lines in fhand:
+    if fname.startswith("X-DSPAM-Confidence: "):
+        start = lines.find(" ")
+        word2 = lines[start+1:]
+        word2 = word2.strip()
+        word2 = float(word2)
+        total = total + word2
+        count = count + 1
+
+avg = total / count
+print("Average spam confidence:", avg)
+
+####################################################################################################################################################################
+# End of Chapter 7
+####################################################################################################################################################################
+
+
+
+
+
+
+
+
 
 
 
