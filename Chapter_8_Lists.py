@@ -265,6 +265,88 @@ delimter.join(t) # 'kiki is a cute cat'
 ####################################################################################################################################################################
 # 8.10 Parsing Lines
 ####################################################################################################################################################################
+# Usually when reading a file, it is often that case there is a need to do something to the line rather than just reading it
+# THis includes parsing the line to find interesting parts of the line
+# Imagine wanting to print out the day of the week from the lines that start with "From":
+# From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008
+
+# The split method is effective for this type of problem. 
+# Write a samll program that looks for lines where the line starts with "From", split those lines and then print out the third word
+
+fhand = open('mbox-short.txt')
+for line in fhand:
+    line = line.rstrip()
+    if not line.startswith("From "): continue
+    words = line.split()
+    print(words[2])
+    
+####################################################################################################################################################################
+# 8.11 Objects and Values
+####################################################################################################################################################################
+# Execute the following assinment statements
+
+a = "kiki"
+b = "kiki"
+
+# Both a and b both refer to a string, but it is not known if they refer to the same string
+# To check whether two variables refer to the same object, use the is operator
+
+a is b # True
+
+# In this example, python only created one string object, and both a and b refer to it
+# But, when you create two lists, two objects are created
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+a is b # False
+
+# In this case, the two lists are equivalent because they have the same elements, but not identical because they are not the same object. 
+# IFt two objects are identical, they are also equivalent, but if they are equivalent, they are not necessarily identical 
+# Object and value are used interchangeably, but it is more precise to say than an object has a vlaue
+####################################################################################################################################################################
+# 8.12 Aliasing
+####################################################################################################################################################################
+# IF a refers to an object and b is assinged to a (b = a) than both variables refer to the same object
+
+a = [1, 2, 3]
+b = a
+b is a # True
+
+# The association of a variable with an object is called a reference. In this example, there are two references to the same object
+# An object with more than one reference has more than one name, this is refered to the object being aliased
+# IF the aliased object is mutable, changes made with one alias affects the other
+
+b[0] = 17
+print(a) # [17, 2, 3]
+
+# Athought this behavior can be useful, it is error-prone, In general, it is safer to avoid aliasing when working with mutable objects
+# For immutable objects like strings, aliasing is not as much of a problem
+
+####################################################################################################################################################################
+# 8.13 List Arguments
+####################################################################################################################################################################
+# When passing a list to a function, the function gets a reference to the list
+# If the function modifies a list parameter, the caller sees the change:
+
+def delete_head(t):
+  del t[0]
+  
+letters = ["a", "b", "c"]
+delete_head(letters)
+print(letters) # ['b', 'c']
+
+# The parameter t and the variable letters are aliases for the same object
+# It is important to distinguish between operations that modify lists and operations that create new lists
+# For example, the append method modifies a list, but the + operator creates a new list:
+
+t1 = [1, 2]
+t2 = t1.append(3)
+
+
+
+
+
+
 
 
 
