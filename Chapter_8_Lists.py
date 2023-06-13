@@ -349,6 +349,65 @@ t3 = t1 + [3]
 print(t3) # [1, 2, 3]
 t1 is t3 # false
 
+# The difference is important for when writing functions that are supposed to modify the list for example this function does not delete the head of a list:
+
+def bad_delete_head(t):
+  t = t[1:]
+  
+# THe slice operator creates a new list and the assignment makes t ferfer to it, but none of that has any effect on the list that was passed as an argument
+# An alternative is to write a function that creates and returns a new list. For example, tail returans all but the first element of a list:
+
+def tail(t):
+  return t[1:]
+
+# The function leaves the original list unmodified. Here's how it is used:
+
+def tail(t):
+    return t[1:]
+
+letters = ["a", "b", "c"]
+rest = tail(letters)
+print(rest)
+
+
+####################################################################################################################################################################
+# Exercise
+####################################################################################################################################################################
+# Write a function called chop that takes a list and modifies it, removing the first and last elements, and returns None. Then write a function called middle that takes a list and returns a new list that contains all but the first and last elements.
+
+def middle(x):
+  y = x[1:len(x) - 1]
+  return y
+
+les = [1, 2, 3, 4, 5]
+print(middle(les))
+
+####################################################################################################################################################################
+# 8.16 Exercises
+####################################################################################################################################################################
+# 1. Write a program to open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split function. For
+# each word, check to see if the word is already in the list of unique words. If the word is not in the list of unique words, add it to the list.
+# When the program completes, sort and print the list of unique words in alphabetical order
+
+fhand = open("romeo.txt")
+les = list()
+
+for lines in fhand:
+    count = 0
+    vec = lines.strip().split()
+    while count <= len(vec)-1:
+        if vec[count] in les:
+            count = count + 1
+        else:
+            les.append(vec[count])
+
+les3 = sorted(les)
+print(les3)
+
+####################################################################################################################################################################
+# End of Chapter 8
+####################################################################################################################################################################
+
 
 
 
