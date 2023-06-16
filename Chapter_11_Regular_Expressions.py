@@ -35,4 +35,46 @@ for line in fhand:
 ####################################################################################################################################################################
 # 11.1 Character Matching in Regular Expressions
 ####################################################################################################################################################################
+# There are a number of ohter special characters that allow for the creation of even more powerful regular expressions. 
+# The most commonly used special character is the period or full stop, which matches any character.
+# In the following example, the regular expression F..m would match any of the strings "From:", "Fxxm:", "F11m:", or "F!@m"
+# This is due to period characters in the regular expressiom matching any characters 
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if re.search('^F..m:', line):
+        print(line)
+
+# This is particularly powerful when combined with the ability to indicate that a character can be repeated any number of tiems using the * or + characters in a regular expression
+# THese special characters mean that instead of matching a single character in the search string, they match zero-or-more characters (in the case of the *) or one-or-more character (int the case of the plus sign *)
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if re.search('^F..m:.+@', line):
+        print(line)
+
+# The search string '^F..m:.+@' will succesffuly search from lines that start with From and have an @ sign
+# The .+ can be thought of as expanding to match all the character between the colon character and the at-sign 
+# It is a good idea to think of the plus and asterisk character as pushy
+# For example the following string would match the last at sign in the string as the .+ pushes outwards
+# From: stephen.marquard@uct.ac.za, csev@umich.edu, and cwen @iupui.edu
+# It is possible to tell an asterisk or plus sign not to be so "greedy" by adding another character. Detailed documentation provides more infomation for turning of this behavior
+
+####################################################################################################################################################################
+# 11.2 Extracting Data using regular expressions
+####################################################################################################################################################################
+# To extract data from a stirng python, the findall() method can be used to extract all of the substrings which matches a regular expression
+# The following program uses findall() to find the lines with email addresses in them and extracts one or more addresses from each of those lines
+
+import re
+s = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
+les = re.findall('\S+@\S+', s)
+print(les) # ['csev@umich.edu', 'cwen@iupui.edu']
+
+
+
 
