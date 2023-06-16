@@ -166,3 +166,114 @@ t # [('c', 22), ('b', 1), ('a', 10)]
 ####################################################################################################################################################################
 # 10.5 Multiple Assignment with dictionaries
 ####################################################################################################################################################################
+# Combining items, tuple assignment and for, proudcues a nuce code pattern for travesing the keys and values of a dictionary in a single loop
+
+d = {'a':10, 'b':1, 'c':22}
+for key, val in list(d.items()):
+  print(val, key)
+
+# THe loop has two iteration variables because items reutrns a list of tuples and key, val is a tuple assignment that sucessively iterates through each of the kay-value pairs in the dictionary
+# For each iteration through the loop, both key and value are advanced to the next key-value pair in the dictionary (still in hash order (No particular order))
+
+# Combining these two techniques, allows for the printing out the contents of a dictionary sorted by the value stored in each key-value pair
+# To do this, first make a list of tuples where each tuples (value, key). THe items method gives a list of key,value tuples
+# However, the goal is to sort by value not key. Once the list is constrcuted with the value-key tuples, it's a simple matter of sorting the list in reverse order and print out the new sorted list
+
+d = {"a": 10, "b": 1, "c":22}
+les = list()
+
+for key,val in d.items():
+    les.append((val, key))
+    
+print(les) # [(10, 'a'), (1, 'b'), (22, 'c')]
+les.sort(reverse = True) 
+print(les) # [(22, 'c'), (10, 'a'), (1, 'b')
+
+# By carefully constructubg tge kust if tuples to have the value as the first element of each tuple, the list of tuples can be sorted to get the dictionary contents sorted by value
+
+####################################################################################################################################################################
+# 10.6 The most Common wORDS
+####################################################################################################################################################################
+# The previous code above can be augmented to print out the most common words in the romeo-full.text
+
+import string
+fhand = open("romeo-full.txt") # Opens the text documnet 
+counts = dict() # Creates an empty dictionary to store the words and their counts
+
+for line in fhand: # Iterates through the line
+    line = line.translate(str.maketrans("", "", string.punctuation)) # Removes the punctuation from the word
+    line = line.lower() # Makes all of the character lowercase
+    words = line.split() # Splits all of the sentences in lists of words
+    for word in words: # Iterates through the list
+        if word not in counts: # Checks to see if a word is already stored in dicitionary
+            counts[word] = 1 # If not it adds it to the dictionary
+        else:
+            counts[word] += 1  # However, if it is already present it increases the value based on the preexisting key
+
+# Sorting the dictionary by value
+
+les = list() # Creates an empty list to store the tuples by their values 
+for key, val in list(counts.items()): # Iterates through a list of the dictionary by the key-value pairs 
+    les.append((val, key)) # Adds them to the list 
+    
+les.sort(reverse = True) # Reverses the list in descending order (highest to lower values based on the value of each key)
+for key,val in les[:10]: # iterates through the list to print out the top ten keys with the highest values
+    print(key, val)
+
+# Since the value is firt in the tuple this allows for comparsions to be made among the key-value pairs 
+# If there is more than one element with the same value it will compare the second element of the tuple to break the tie. In this case this further sorts them alphabetically 
+
+####################################################################################################################################################################
+# 10.7 Using Tuples as keys in dictionaries 
+####################################################################################################################################################################
+# Because tuples are hashable and lists are not, to create a composite key to use in a dictionary, a tuple must be used as a key 
+# A composite key could be encountered when creating a telephone directory that maps from last-name, first-name pairs to telephone numbers
+# Assuming that the defined variables (last, first, and number are avialable) a dictionary assignment statement could be created as follows
+
+directory[last, first] = number
+
+# The expression in brackets is a tuple. Tuple assignment in a for loop could be used to traverse this dictionary
+
+for last, first in directory:
+  print(first, last, directory[last,first])
+
+# The loop traverses the keys in directory, which are tuples and assigns the elements of each tuple to last and first, and then prints the name corresponding telephone number
+
+####################################################################################################################################################################
+# 10.8 Sequences: Strings, lists and Tuples
+####################################################################################################################################################################
+# Focus has been on lists of tuples, but almost all examples that have been worked through, also work with lists of lists, tuples of tuples, and tuples of lists
+# To avoid enumerating the possible cobinations, it is sometimes easier to discuss the sequences of sequences
+# In many contexts, the idferent kinds of sequences (strings, lists, and tuples) can be used interchngeably, so how are the chosen over each other?
+# To start, strings are more limited than other sequences because the elements have to be charachters, They are also immutable
+# To have the ability to change the characters in a string (as opposed to creating a new string), it may bethe better option to use a list of characters instead
+# Listsa are more common than tuples, mostly because they are mutable. But there are a few cases where tuples are prefered 
+# 1. In some contexts, such as a return statement, it is syntactically simpler to create a tuple than a list. In other contexts, a list might be preferred 
+# 2. To use a sequence as a dictionary key, an imutable type like a tuple or string must be used
+# 3. If passing a ssequence as an argument to a function, using tuples reduces the ptoetnial for unexpected behavior due to aliasing
+
+# Because tuples are immutable, they don’t provide methods like sort and reverse, which modify existing lists
+# However, python provides buil in functions sorted and reversed, which take aby sequence as a parameter and returna new sequence with the same elements in a different order
+
+####################################################################################################################################################################
+# 10.9 List Comprehension
+####################################################################################################################################################################
+# A sequence can be created by using data from another sequence, this can be achieved by writing a for loop and appending one item at a time. 
+# For example, if you wanted to convert a list of strings- each string storing digits into nubmers that can be summed up 
+
+list_of_ints_in_strings = ['42', '65', '12']
+list_of_ints = []
+for x in list_of_ints_in_strings:
+  list_of_ints.append(int(x))
+print(sum(list_of_ints)) # 119
+
+# With list comphrehension, the above code can be written in a more compact manner
+
+list_of_ints_in_strings = ['42', '65', '12']
+list_of_ints = [ int(x) for x in list_of_ints_in_strings ]
+print(sum(list_of_ints)) # 119
+
+
+####################################################################################################################################################################
+# End Of Chapter 10
+####################################################################################################################################################################
