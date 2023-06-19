@@ -82,4 +82,41 @@ print(les) # ['csev@umich.edu', 'cwen@iupui.edu']
 # The regular expression would match twice ['csev@umich.edu', 'cwen@iupui.edu'] but it would not match the string "@2PM" because there are no non-blank characters before the at sign
 # Regular expressions in a program can be used to read all the lines in a file and print out anything that looks like an email address as follows: 
 
+import re
+fhand = open('mbox-short.txt')
+for line in fhand:
+    line = line.rstrip()
+    x = re.findall("\S+@\S+", line)
+    if len(x) > 0:
+        print(x)
+
+# Each line is read and then all the substrings that match the regular expression are extracted
+# Since finall() returns a list, the number of elements in the list is check to find more than zero to print only lines where at least one substring was found
+
+# Some of the email adddresses have incorrect characters like "<" or ";" at the beginning or end
+# Regular expression can be used to exract the portion of the string that starts and ends with a letter or a number
+# This requires using another feature of regular expressions
+# Square brackets are ussed to indicate a set of multiple acceptable characters to match with
+# Remember, \s is asking to match the set of "non-white space characters"
+# Here is the new regular expression:
+# [a-zA-Z0-9]\S*@\S*[a-zA-Z]
+# The regular expression starts by looking for substrings thqt start with a single lowercase letter, uppercase letter, or number, followed by zero or more non-blank characcters (\S*)
+# Followed by an at-sign, followed by zero or more non-blank characters (\S*) followed by an uppercase or lowercase letter
+# The switch from + to * indicate zero or more non-blank character since  [a-zA-Z0-9] is already one non-blank character
+# Remember that the * or + applies to the single character immediately to the left of the plus or asterisk
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    x = re.findall('[a-zA-Z0-9]\S*@\S*[a-zA-Z]', line)
+    if len(x) > 0:
+        print(x)
+        
+# The regular expression eliminated two letters at the end of the string (">")
+# This is because when apeending [a-zA-Z] to the end of the regular expression demands wahatever string the regular expression aprser finds must end with a letter
+
+####################################################################################################################################################################
+# 11.3 Combining Searching and Extracting 
+####################################################################################################################################################################
 
