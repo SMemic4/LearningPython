@@ -75,6 +75,11 @@ s = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
 les = re.findall('\S+@\S+', s)
 print(les) # ['csev@umich.edu', 'cwen@iupui.edu']
 
-
+# The findall() method searches the string in the second argument and returns a list of all of the strings that look like email addresses
+# Using a two-character sequence that matches a non-whitespace character (\S)
+# Translating the regular expression, it searches for substrings that have at least one non-whitespace character, followed by an @ sign followed by at least one more non-whitespace character
+# \S matches as many non-whitespace characters as possible
+# The regular expression would match twice ['csev@umich.edu', 'cwen@iupui.edu'] but it would not match the string "@2PM" because there are no non-blank characters before the at sign
+# Regular expressions in a program can be used to read all the lines in a file and print out anything that looks like an email address as follows: 
 
 
