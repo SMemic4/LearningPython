@@ -119,4 +119,110 @@ for line in hand:
 ####################################################################################################################################################################
 # 11.3 Combining Searching and Extracting 
 ####################################################################################################################################################################
+# To find numbers on the lines that start with the string "X-" such as:
+# X-DSPAM-Confidence: 0.8475
+# X-DSPAM-Probability: 0.0000
+# To extract any floating-point numbers that have the same syntax
+# A regular expression can be used to select thesde lines:
+# ^X-.*: [0-9.]+
+# The regular expression above starts by looking for lines that start with X-, followed by zero or more charracter (.*), followed by a colon (:) and then a space
+# After the space it looks for one or more characters that are either a digit (0-9) or a peiod [0-9.]+
+# Note that inside teh square brackets, the period ,atches an actual period 
+
+import re
+
+fhand = open("mbox-short.txt")
+for line in fhand:
+    line = line.rstrip()
+    if re.search('^X\S*: [0-9.]+', line):
+        print(line)
+
+# When running the program above, the data filters to show only the lines that are of interest
+# However, now the issue is solving the problem of extracting the numbers
+# While it would be simple enough to use split, there is another feature of regular expressions that both searches and parses the line at the same time. 
+
+# Parentheses are another special character in regular expressions, when adding parentheses to a regular expression, they are ignored when matching the string
+# But when using finall(), parenthese indicate to the code toee match the whole whole expression, but to only extract a protion of the substring that matches the regular expression
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    x = re.findall('^X\S*: ([0-9.]+)', line)
+    if len(x) > 0:
+        print(x)
+
+# Instead of calling search)_, parentheses are added as part of the regular expression that represnets the folating-point number to indicate to finall() to return the floating-point number portion of the matching string
+
+# The code to extract all of the revisionnumbers (the integer number at the end of the lines)
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+  line = line.rstrip()
+  x = re.findall('^Details:.*rev=([0-9]+)', line)
+  if len(x) > 0:
+    print(x)
+
+# The regex, beings by looking for lines that start with Details: followed by an number of character (.*) followed by rev=, and then one or more digits
+# This finds the lines that match the regular expression but only extracts the integer number at the end of the line 
+# Remember that [0-9]+ is "greedy" and it tries to make as large a string ofd digits as possible before extracting those digits
+# This greedy behavior is why all five digits for eahc numbers are extracted from eahc line
+# The regular expression expands in both directions until it encounters a non-digit or the beginning or the end of a line
+
+
+# To extract the hour of the day for each line from the previous exercises would use the following regular expression:
+# ^From .* [0-9][0-9]:
+# The translation of this regular expression is that it looks for lines that with From (note the space). followed by an number of chracter (.*), followed by a space, followed by two digits [0-9][0-9], followed by a colon charcter
+# In order to pull out only the hour using findall(), add parenthesse around the two digits as follows: 
+# ^From .* ([0-9][0-9]):
+
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+  line = line.rstrip()
+  x = re.findall('^From .* ([0-9][0-9]):', line)
+  if len(x) > 0:
+    print(x)
+
+####################################################################################################################################################################
+# 11.4 Escape Character
+####################################################################################################################################################################
+# Since special characters are used in regular expressions to match the beginning or end of a line or specifiy wild cards a method to indicate these characters are "normal" is needed
+# THese are indicated by simply match a character by prefixing the character with a backslash
+
+import re
+x = 'We just received $10.00 for cookies.'
+y = re.findall('\$[0-9.]+',x) # 12
+
+# Since the dollar sign is prefixed with a backslash it asctually matches the dolloar sing ni the input string instead of matching the "end of line" and the rest of the regular expression matches one or more digits or the period character
+# Note that inside square brackets, characters are not "special". When saying [0-9] it really means digits or a period. Outside of square bracets a period is the wildcard character and matches any character. Inside square brackets it's simply a period
+
+####################################################################################################################################################################
+# 11.5 Summary
+####################################################################################################################################################################
+# There are search strings with special characters in them that expand regular expression systems and matching
+# ˆ Matches the beginning of the line.
+# $ Matches the end of the line.
+# . Matches any character (a wildcard).
+# \s Matches a whitespace character.
+# \S Matches a non-whitespace character (opposite of \s).
+# * Applies to the immediately preceding character(s) and indicates to match zero or more times.
+# *? Applies to the immediately preceding character(s) and indicates to match zero or more times in “non-greedy mode”.
+# + Applies to the immediately preceding character(s) and indicates to match one or more times.
+# +? Applies to the immediately preceding character(s) and indicates to match one or more times in “non-greedy mode”.
+# ? Applies to the immediately preceding character(s) and indicates to match zero or one time.
+# ?? Applies to the immediately preceding character(s) and indicates to match zero or one time in “non-greedy mode”.
+# [aeiou] Matches a single character as long as that character is in the specified set. In this example, it would match “a”, “e”, “i”, “o”, or “u”, but no other characters.
+# [a-z0-9] You can specify ranges of characters using the minus sign. This example is a single character that must be a lowercase letter or a digit.
+# [ˆA-Za-z] When the first character in the set notation is a caret, it inverts the logic. This example matches a single character that is anything other than an uppercase or lowercase letter.
+# ( ) When parentheses are added to a regular expression, they are ignored for the purpose of matching, but allow you to extract a particular subset of the matched string rather than the whole string when using findall().
+# \b Matches the empty string, but only at the start or end of a word.
+# \B Matches the empty string, but not at the start or end of a word.
+# \d Matches any decimal digit; equivalent to the set [0-9].
+# \D Matches any non-digit character; equivalent to the set [ˆ0-9].
+
+####################################################################################################################################################################
+# End Of Chapter 11
+####################################################################################################################################################################
 
